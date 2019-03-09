@@ -55,11 +55,12 @@ export function sortFirstOrderOperations(ops:Array<any>){
             let next = ops[i + 1];
             let prev = ops[i - 1];
 
-            // if previous item is not an mult or div op, start new group
+            // if previous item is not an mult or div op, get starting index
             if(!isMultOrDiv(prev) && isMultOrDiv(next)){
                 group.push(i)
             }
 
+            // get ending index
             if(isMultOrDiv(prev) && !isMultOrDiv(next)){
                 group.push(i)
             }
@@ -69,6 +70,8 @@ export function sortFirstOrderOperations(ops:Array<any>){
 
         }
     }
+
+    // need to clean things up a bit.
 
     // splice empty arrays
     let indices = [];
@@ -87,6 +90,11 @@ export function sortFirstOrderOperations(ops:Array<any>){
     return multDivIndices;
 }
 
+/**
+ * Extracts all multiplication and division operations that need to be performed
+ * @param ops {Array} the operational table
+ * @param groups {Array} array of start and end indices that will be used to extract operations from the table.
+ */
 export function sortMultiplicationDivisionOperations(ops:Array<any>,groups:Array<any>){
     // extract all of the multiplication and division operations that need to be run first
     let multDivOps = [];
@@ -130,6 +138,9 @@ export function divisionOperations(op:Array<any>){
     return value;
 }
 
+/**
+ * Lookup table of all operations in their string forms
+ */
 export const lookupTable = {
     "+"(v1,v2){
         return v1 + v2;
@@ -161,6 +172,11 @@ export function divisionOperationOne(op:Array<number>){
 
 }
 
+/**
+ * Basically the same function as above but keeping it separate since there's a chance
+ * multiple division operators will cause things to break.
+ * @param op
+ */
 export function divisionOperationsMultiple(op:Array<number>){
     let value = op[0];
     for(let i = 1; i < op.length; i++){
@@ -171,52 +187,3 @@ export function divisionOperationsMultiple(op:Array<number>){
     return value;
 }
 
-/**
- * Goes through the operational array to figure out the start and end indices
- * of addition or subtraction operations that need to be performed.
- * @param ops {Array} array of operations and values to operate on.
- */
-export function sortSecondOrderOperations(ops:Array<any>){
-    let groupIndices = [];
-    for(let i = 0; i < ops.length; ++i){
-        let group = [];
-        let itm = ops[i];
-
-        // filter through numbers
-        if(!isPlusOrMinus(itm) && !isMultOrDiv(itm)){
-
-            // get the next or previous op
-            let next = ops[i + 1];
-            let prev = ops[i - 1];
-
-            // if previous item is not an mult or div op, start new group
-            if(!isPlusOrMinus(prev) && isPlusOrMinus(next)){
-                group.push(i)
-            }
-
-            if(isPlusOrMinus(prev) && !isPlusOrMinus(next)){
-                group.push(i)
-            }
-
-
-            groupIndices.push(group);
-
-        }
-    }
-
-    // splice empty arrays
-    let indices = [];
-    for(let i = 0; i < groupIndices.length; ++i){
-        if(groupIndices[i].length > 0){
-            indices.push(groupIndices[i][0]);
-        }
-    }
-    let plusMinusIndices = [];
-
-    // pair off each index
-    for(let i = 0; i < indices.length; i += 2){
-        plusMinusIndices .push([indices[i],indices[i +1]]);
-    }
-
-    return plusMinusIndices;
-}

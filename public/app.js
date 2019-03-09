@@ -33,16 +33,18 @@
                 // get the next or previous op
                 var next = ops[i + 1];
                 var prev = ops[i - 1];
-                // if previous item is not an mult or div op, start new group
+                // if previous item is not an mult or div op, get starting index
                 if (!isMultOrDiv(prev) && isMultOrDiv(next)) {
                     group.push(i);
                 }
+                // get ending index
                 if (isMultOrDiv(prev) && !isMultOrDiv(next)) {
                     group.push(i);
                 }
                 groupIndices.push(group);
             }
         }
+        // need to clean things up a bit.
         // splice empty arrays
         var indices = [];
         for (var i = 0; i < groupIndices.length; ++i) {
@@ -57,6 +59,11 @@
         }
         return multDivIndices;
     }
+    /**
+     * Extracts all multiplication and division operations that need to be performed
+     * @param ops {Array} the operational table
+     * @param groups {Array} array of start and end indices that will be used to extract operations from the table.
+     */
     function sortMultiplicationDivisionOperations(ops, groups) {
         // extract all of the multiplication and division operations that need to be run first
         var multDivOps = [];
@@ -84,6 +91,9 @@
         });
         return value;
     }
+    /**
+     * Lookup table of all operations in their string forms
+     */
     var lookupTable = {
         "+": function (v1, v2) {
             return v1 + v2;
@@ -112,6 +122,11 @@
         }
         return value;
     }
+    /**
+     * Basically the same function as above but keeping it separate since there's a chance
+     * multiple division operators will cause things to break.
+     * @param op
+     */
     function divisionOperationsMultiple(op) {
         var value = op[0];
         for (var i = 1; i < op.length; i++) {
@@ -121,7 +136,6 @@
         }
         return value;
     }
-    //# sourceMappingURL=mathutils.js.map
 
     /**
      * Takes a string like 3+3+3 and splits it into an array that can be more easily digested
@@ -227,6 +241,7 @@
             //3 * 9 /200 * 1000 + 20 - 100
         }); // end button listener
     }
+    //# sourceMappingURL=math.js.map
 
     var VISIT_KEY = "NUM_VISITS";
     window.onload = function () {
