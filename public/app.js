@@ -136,6 +136,7 @@
         }
         return value;
     }
+    //# sourceMappingURL=mathutils.js.map
 
     /**
      * Takes a string like 3+3+3 and splits it into an array that can be more easily digested
@@ -241,7 +242,6 @@
             //3 * 9 /200 * 1000 + 20 - 100
         }); // end button listener
     }
-    //# sourceMappingURL=math.js.map
 
     var VISIT_KEY = "NUM_VISITS";
     window.onload = function () {

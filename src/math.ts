@@ -1,9 +1,12 @@
 import {
-    divisionOperationOne, divisionOperationsMultiple, isPlusOrMinus, lookupTable,
+    divisionOperationOne,
+    divisionOperationsMultiple,
+    isPlusOrMinus,
+    lookupTable,
     multiplyOperation,
     operatorSearch,
     sortFirstOrderOperations,
-    sortMultiplicationDivisionOperations, sortSecondOrderOperations
+    sortMultiplicationDivisionOperations,
 } from './mathutils'
 
 
