@@ -1,7 +1,12 @@
 (function () {
     'use strict';
 
-    //# sourceMappingURL=game.js.map
+    //https://codepen.io/sortofsleepy/full/bgjamJ
+    function startGame () {
+        var script = document.createElement("script");
+        script.src = "/game.js";
+        document.body.appendChild(script);
+    }
 
     var operatorSearch = /[-+\/*]/g;
     /**
@@ -136,7 +141,6 @@
         }
         return value;
     }
-    //# sourceMappingURL=mathutils.js.map
 
     /**
      * Takes a string like 3+3+3 and splits it into an array that can be more easily digested
@@ -266,12 +270,12 @@
                 window.location.href = "/";
                 break;
             case "/game":
+                startGame();
                 break;
             case "/math":
                 startMath();
                 break;
         }
     };
-    //# sourceMappingURL=app.js.map
 
 }());
