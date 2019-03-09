@@ -1,4 +1,4 @@
-export const operatorSearch = /[-+.\/*]/g;
+export const operatorSearch = /[-+\/*]/g;
 
 /**
  * Helps figure out if the string refers to a multiplication or division operation.
@@ -95,7 +95,8 @@ export function sortMultiplicationDivisionOperations(ops:Array<any>,groups:Array
         let joined = op.join("");
         multDivOps.push({
             operation:op,
-            string:joined
+            string:joined,
+            insertIndex:itm[0]
         });
     });
     return multDivOps;
@@ -158,4 +159,64 @@ export function divisionOperationOne(op:Array<number>){
     }
     return value;
 
+}
+
+export function divisionOperationsMultiple(op:Array<number>){
+    let value = op[0];
+    for(let i = 1; i < op.length; i++){
+        if(isNaN(parseFloat(op[i].toString()))){
+            value = lookupTable[op[i].toString()](value,op[i + 1]);
+        }
+    }
+    return value;
+}
+
+/**
+ * Goes through the operational array to figure out the start and end indices
+ * of addition or subtraction operations that need to be performed.
+ * @param ops {Array} array of operations and values to operate on.
+ */
+export function sortSecondOrderOperations(ops:Array<any>){
+    let groupIndices = [];
+    for(let i = 0; i < ops.length; ++i){
+        let group = [];
+        let itm = ops[i];
+
+        // filter through numbers
+        if(!isPlusOrMinus(itm) && !isMultOrDiv(itm)){
+
+            // get the next or previous op
+            let next = ops[i + 1];
+            let prev = ops[i - 1];
+
+            // if previous item is not an mult or div op, start new group
+            if(!isPlusOrMinus(prev) && isPlusOrMinus(next)){
+                group.push(i)
+            }
+
+            if(isPlusOrMinus(prev) && !isPlusOrMinus(next)){
+                group.push(i)
+            }
+
+
+            groupIndices.push(group);
+
+        }
+    }
+
+    // splice empty arrays
+    let indices = [];
+    for(let i = 0; i < groupIndices.length; ++i){
+        if(groupIndices[i].length > 0){
+            indices.push(groupIndices[i][0]);
+        }
+    }
+    let plusMinusIndices = [];
+
+    // pair off each index
+    for(let i = 0; i < indices.length; i += 2){
+        plusMinusIndices .push([indices[i],indices[i +1]]);
+    }
+
+    return plusMinusIndices;
 }

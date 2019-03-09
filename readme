@@ -9,4 +9,5 @@ Use
 
 Notes
 ====
-All routes basically load the same page, any "routing" is handled on the front-end.
+* All routes basically load the same page, any "routing" is handled on the front-end.
+* For math - it's assumed that there are no un-necessary characters. 
