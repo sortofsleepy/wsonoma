@@ -154,6 +154,11 @@ export const lookupTable = {
     "*"(v1,v2){
         return v1 * v2;
     },
+
+    "plus":"+",
+    "minus":"-",
+    "divide":"/",
+    "multiply":"*"
 };
 
 /**

@@ -39,9 +39,32 @@ function separateNumbersFromOperation(text){
     return numbers;
 }
 
+function handlePathname(){
+
+    if(window.location.pathname !== "/"){
+        let input = document.querySelector("input");
+
+        // split path
+        let path = window.location.pathname;
+        path = path.replace("/math","");
+
+        let splitpath = path.split("/");
+        splitpath.shift();
+
+        splitpath.forEach(itm => {
+            if(parseFloat(itm)){
+                input.value += itm;
+            }else {
+                input.value += lookupTable[itm];
+            }
+        })
+
+    }
+}
 
 export default function (){
 
+    handlePathname();
     let math = document.querySelector("#math");
     math['style'].display = "block";
 

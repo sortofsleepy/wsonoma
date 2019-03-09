@@ -4,6 +4,7 @@ const VISIT_KEY = "NUM_VISITS";
 window.onload = () => {
 
     let path = window.location.pathname;
+    let mathStarted = false;
     switch (path) {
         case "/":
 
@@ -32,6 +33,15 @@ window.onload = () => {
 
         case "/math":
             startMath();
+            mathStarted = true;
             break;
+
+    }
+
+    // math is special - do extra tests
+    if(window.location.pathname.search("/math") !== 1){
+         if(!mathStarted){
+            startMath();
+        }
     }
 };

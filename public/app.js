@@ -111,7 +111,11 @@
         },
         "*": function (v1, v2) {
             return v1 * v2;
-        }
+        },
+        "plus": "+",
+        "minus": "-",
+        "divide": "/",
+        "multiply": "*"
     };
     /**
      * Runs through an operation that has just one division operator.
@@ -166,7 +170,26 @@
         }
         return numbers;
     }
+    function handlePathname() {
+        if (window.location.pathname !== "/") {
+            var input_1 = document.querySelector("input");
+            // split path
+            var path = window.location.pathname;
+            path = path.replace("/math", "");
+            var splitpath = path.split("/");
+            splitpath.shift();
+            splitpath.forEach(function (itm) {
+                if (parseFloat(itm)) {
+                    input_1.value += itm;
+                }
+                else {
+                    input_1.value += lookupTable[itm];
+                }
+            });
+        }
+    }
     function startMath () {
+        handlePathname();
         var math = document.querySelector("#math");
         math['style'].display = "block";
         var output = document.querySelector("#output");
@@ -250,6 +273,7 @@
     var VISIT_KEY = "NUM_VISITS";
     window.onload = function () {
         var path = window.location.pathname;
+        var mathStarted = false;
         switch (path) {
             case "/":
                 // I know you can use Cookies too but decided to do it in a way I"m more used to.
@@ -274,7 +298,14 @@
                 break;
             case "/math":
                 startMath();
+                mathStarted = true;
                 break;
+        }
+        // math is special - do extra tests
+        if (window.location.pathname.search("/math") !== 1) {
+            if (!mathStarted) {
+                startMath();
+            }
         }
     };
 
