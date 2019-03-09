@@ -1,0 +1,21 @@
+{
+  "name": "williamssonoma",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "build": "rollup -c",
+    "dev": "rollup  -c --watch | node server/app.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.16.4"
+  },
+  "devDependencies": {
+    "typescript": "^3.3.3333",
+    "rollup": "^1.2.2",
+    "rollup-plugin-typescript": "^1.0.0",
+    "tslib": "^1.9.3"
+  }
+}

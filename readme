@@ -1,0 +1,12 @@
+
+Install
+====
+* run npm install
+
+Use
+==
+* run `npm run dev` from the root of the folder. It will start a server on `localhost:3000`
+
+Notes
+====
+All routes basically load the same page, any "routing" is handled on the front-end.
