@@ -3,9 +3,9 @@
 
     //https://codepen.io/sortofsleepy/full/bgjamJ
     function startGame () {
-        var script = document.createElement("script");
-        script.src = "/game.js";
-        document.body.appendChild(script);
+        var iframe = document.createElement("iframe");
+        iframe.src = "https://xoio-sketches.surge.sh/orbits/public/index.html";
+        document.body.appendChild(iframe);
     }
 
     var operatorSearch = /[-+\/*]/g;

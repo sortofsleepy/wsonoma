@@ -10,7 +10,6 @@ const app = express();
 const args = utils.processArgs();
 
 
-// setup routes
 app.get('/', Home);
 app.get("/math",Math);
 app.get("/math/:n1/:method/:n2",Math);

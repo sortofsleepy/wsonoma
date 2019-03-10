@@ -2,8 +2,8 @@
 
 export default function(){
 
-    let script = document.createElement("script");
-    script.src = "/game.js";
-    document.body.appendChild(script);
+    let iframe = document.createElement("iframe");
+    iframe.src = "https://xoio-sketches.surge.sh/orbits/public/index.html";
+    document.body.appendChild(iframe);
 
 }
